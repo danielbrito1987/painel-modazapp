@@ -1,0 +1,97 @@
+<div class="col-md-12">
+        <nb-card>
+            <nb-card-header>Pedido nº {{ id }}</nb-card-header>
+            <nb-card-body>
+                <form>
+                <div class="form-group">
+                    <label>Data registro</label>
+                    <input disabled type="text" class="form-control" placeholder="Data Registro" #DataRegistro [value]="model.DataRegistro | date: 'dd/MM/yyyy'">
+                    <!-- <textarea class="form-control" placeholder="Descrição Completa" #DescCompleta></textarea> -->
+                </div>    
+                <div class="form-group">
+                    <label>Cliente</label>
+                    <input disabled type="text" class="form-control" [value]="model.NomeCliente" placeholder="Nome do Cliente" #NomeCliente>
+                </div>
+                <div class="form-group">
+                    <label>Endereço Entrega</label>
+                    <input disabled type="text" class="form-control" [value]="model.Endereco" placeholder="Endereço de Entrega" #Endereco>
+                </div>            
+                <div class="form-group">
+                    <label>Telefone de Contato</label>
+                    <input disabled type="text" class="form-control" [value]="model.Contato" placeholder="Telefone de Contato" #Contato>
+                </div>
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input disabled type="text" class="form-control" [value]="model.Email" placeholder="E-mail" #Email>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select *ngIf="status != 'Concluído'" #Status class="form-control" [value]="status" (change)="selectStatus(Status.value);">
+                        <option value="Aberto">Aberto</option>
+                        <option value="Aguardando Pagamento">Aguardando Pagamento</option>
+                        <option value="Concluído">Concluído</option>
+                        <option value="Rejeitado">Rejeitado</option>
+                        <option value="Expedição">Expedição</option>
+                        <option value="Entregue">Entregue</option>
+                        <option value="Em Produção">Em produção</option>
+                    </select>
+                    <select *ngIf="status == 'Concluído'" disabled #Status class="form-control" [value]="status" (change)="selectStatus(Status.value);">
+                        <option value="Aberto">Aberto</option>
+                        <option value="Aguardando Pagamento">Aguardando Pagamento</option>
+                        <option value="Concluído">Concluído</option>
+                        <option value="Rejeitado">Rejeitado</option>
+                        <option value="Expedição">Expedição</option>
+                        <option value="Em Produção">Em produção</option>
+                    </select>
+                </div>
+                </form>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th nowrap>Cód. Produto</th>
+                                        <th nowrap>Descrição</th>
+                                        <th nowrap>Qtd. P</th>
+                                        <th nowrap>Qtd. M</th>
+                                        <th nowrap>Qtd. G</th>
+                                        <th nowrap>Qtd. GG</th>
+                                        <th nowrap>Qtd. XG</th>
+                                        <th nowrap>Qtd. XGG</th>
+                                        <th nowrap>Valor Unit.</th>
+                                        <th nowrap>Valor Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of itemPedido">
+                                        <td>{{ item.IdProduto }}</td>
+                                        <td nowrap>{{ item.DescProduto }}</td>
+                                        <td>{{ item.QtdPedidoP }}</td>
+                                        <td>{{ item.QtdPedidoM }}</td>
+                                        <td>{{ item.QtdPedidoG }}</td>
+                                        <td>{{ item.QtdPedidoGG }}</td>
+                                        <td>{{ item.QtdPedidoXG }}</td>
+                                        <td>{{ item.QtdPedidoXGG }}</td>
+                                        <td>{{ item.PrecoUnit | number : '1.2-2' }}</td>
+                                        <td>{{ item.ValorTotal | number : '1.2-2' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan=10 style="text-align: right">Total: {{ totalPedido | number : '1.2-2' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="row" style="padding-top:10px;">
+                    <div class="col-md-12">
+                        <button *ngIf="model.Status != 'Concluído'" type="submit" class="btn btn-success" (click)="salvarPedido(id, status)">Salvar</button>
+                        <a href="#" [routerLink]="['/pages/pedidos']" class="btn btn-danger">Cancelar</a>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>

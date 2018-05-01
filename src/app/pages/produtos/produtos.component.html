@@ -1,0 +1,10 @@
+<nb-card>
+  <nb-card-header>
+    Produtos
+  </nb-card-header>
+
+  <nb-card-body style="overflow-x: auto">
+    <ng2-smart-table [settings]="settings" [source]="source" (create)="openCreateDialog($event)" (edit)="openEditDialog($event)" (delete)="onDeleteConfirm($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,140 @@
+<div class="col-md-12">
+    <nb-card>
+        <nb-card-header>Novo Produto</nb-card-header>
+        <nb-card-body>
+            <form>
+            <div class="form-group">
+                <label>Descrição</label>
+                <input type="text" class="form-control" placeholder="Descrição" #Descricao [value]="model.Descricao">
+            </div>
+            <div class="form-group">
+                <label>Descrição Completa</label>
+                <ckeditor [config]="{ extraPlugins: 'divarea', height: '320' }" [(ngModel)]="ckEditorContent" [ngModelOptions]="{standalone: true}"></ckeditor>
+                <!-- <textarea class="form-control" placeholder="Descrição Completa" #DescCompleta></textarea> -->
+            </div>
+
+            <div class="form-group">
+                <table cellpadding="10">
+                    <thead>
+                        <tr>
+                            <th>Tamanhos</th>
+                            <th>Estoque</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label>P</label>
+                            </td>
+                            <td>
+                                <fieldset class="form-group">
+                                    <input #QtdP class="form-control" [value]="model.EstoqueP">
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>M</label>
+                            </td>
+                            <td>
+                                <fieldset class="form-group">
+                                    <input #QtdM class="form-control" [value]="model.EstoqueM">
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>G</label>
+                            </td>
+                            <td>
+                                <fieldset class="form-group">
+                                    <input #QtdG class="form-control" [value]="model.EstoqueG">
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>GG</label>
+                            </td>
+                            <td>
+                                <fieldset class="form-group">
+                                    <input #QtdGG class="form-control" [value]="model.EstoqueGG">
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>XG</label>
+                            </td>
+                            <td>
+                                <fieldset class="form-group">
+                                    <input #QtdXG class="form-control" [value]="model.EstoqueXG">
+                                </fieldset>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>XGG</label>
+                            </td>
+                            <td>
+                                <fieldset class="form-group">
+                                    <input #QtdXGG class="form-control" [value]="model.EstoqueXGG">
+                                </fieldset>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-group">
+                <label>Valor</label>
+                <input type="text" class="form-control" [value]="numberToReal(model.Valor)" placeholder="Valor Varejo" #Valor>
+            </div>
+            <div class="form-group">
+                <label>Valor Atacado</label>
+                <input type="text" class="form-control" [value]="numberToReal(model.ValorAtacado)" placeholder="Valor Atacado" #ValorAtacado>
+            </div>            
+            </form>
+            <fieldset class="form-group">
+                <label for="exampleInputFile">Imagem</label>
+                <!--<input #Imagem type="file" ng-model="myFile" accept="image/*" class="form-control-file" id="myFile" (change)="getFiles($event)">-->
+                <input id="fileUpload1" type="file" />
+                <input type="submit" value="Inserir Imagem" name="btnUploadFile1" id="btnUploadFile1" (click)="enviarImagem1()">
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="exampleInputFile">Imagem</label>
+                <!--<input #Imagem type="file" ng-model="myFile" accept="image/*" class="form-control-file" id="myFile" (change)="getFiles($event)">-->
+                <input id="fileUpload2" type="file" />
+                <input type="submit" value="Inserir Imagem" name="btnUploadFile2" id="btnUploadFile2" (click)="enviarImagem2()">
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="exampleInputFile">Imagem</label>
+                <!--<input #Imagem type="file" ng-model="myFile" accept="image/*" class="form-control-file" id="myFile" (change)="getFiles($event)">-->
+                <input id="fileUpload3" type="file" />
+                <input type="submit" value="Inserir Imagem" name="btnUploadFile3" id="btnUploadFile3" (click)="enviarImagem3()">
+            </fieldset>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Imagens Cadastradas</label>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://api.modazapp.online/Content/imagens/{{ idLoja }}/{{ model.Slide1 }}" style="width: 50%;" />
+                </div>
+                <div class="col-md-4">
+                    <img src="https://api.modazapp.online/Content/imagens/{{ idLoja }}/{{ model.Slide2 }}" style="width: 50%;" />
+                </div>
+                <div class="col-md-4">
+                    <img src="https://api.modazapp.online/Content/imagens/{{ idLoja }}/{{ model.Slide3 }}" style="width: 50%;" />
+                </div>
+            </div>
+
+            <div class="row" style="padding-top:10px;">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-success" (click)="salvarProduto(Descricao.value, QtdP.value, QtdM.value, QtdG.value, QtdGG.value, QtdXG.value, QtdXGG.value, Valor.value, ValorAtacado.value);">Salvar</button>
+                    <a href="#" [routerLink]="['/pages/produtos']" class="btn btn-danger">Cancelar</a>
+                </div>
+            </div>
+        </nb-card-body>
+    </nb-card>
+</div>
